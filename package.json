@@ -1,0 +1,23 @@
+{
+  "name": "MassEdit",
+  "version": "1.0.0",
+  "description": "MassEdit - A text editor for the masses.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rodaan/2016-04-mvp.git"
+  },
+  "author": "rodaan",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.4.5",
+    "mongoose": "^4.1.0"
+  }
+  "bugs": {
+    "url": "https://github.com/rodaan/2016-04-mvp/issues"
+  },
+  "homepage": "https://github.com/rodaan/2016-04-mvp#readme"
+}

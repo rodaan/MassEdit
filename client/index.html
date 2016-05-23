@@ -1,0 +1,19 @@
+<html>
+    <head>
+      <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"> <!-- the reason for everything. Clean styles-->
+      <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"><!-- Styles for right controls-->
+       <link rel="stylesheet" href="style.css"><!-- Custom styles-->
+      <link rel="stylesheet" href="lib/textAngular.css">
+      <script src="lib/angular.min.js"></script>
+      <script src="lib/textAngular.min.js"></script>
+      <script src="lib/textAngular-sanitize.min.js"></script>
+      <script src="lib/textAngular-rangy.min.js"></script>
+      <script src="app.js"></script>
+    </head>
+    <body ng-app="MySimpleEditor">
+	    <h1>MassEdit</h1>
+	    <div ng-controller="MyController">
+	      <div text-angular ng-model="htmlContent"></div>
+      </div>
+    </body>
+</html>

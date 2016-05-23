@@ -43,3 +43,17 @@ I really like how I can see how professional developers work and interact with t
 ## Closing and Call to Action ##
   > Wrap it up and give pointers where the reader should go next.
 Just go to massedit.com, give authorization to Mass-Edit to access your Github and give it a try!
+
+
+## Stack ##
+Angular
+Node
+Express
+Bootstrap
+
+Step 1:
+[ x ] Create a text editor interface
+Step 2:
+[] Ensure multiple people can access it
+Step 3:
+[ ] Ensure state saves into file based on project
