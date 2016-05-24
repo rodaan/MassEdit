@@ -1,5 +1,9 @@
-var app = require('express')();
+var express = require('express');
+var mongoose = require('mongoose');
+var app = express();
 var http = require('http').Server(app);
+
+app.use(express.static(__dirname + '/client'))
 
 
 app.get('/', function(req, res){
