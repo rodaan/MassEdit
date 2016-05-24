@@ -15,7 +15,7 @@
   "dependencies": {
     "express": "^4.4.5",
     "mongoose": "^4.1.0"
-  }
+  },
   "bugs": {
     "url": "https://github.com/rodaan/2016-04-mvp/issues"
   },
