@@ -11,6 +11,6 @@ var documentSchema = new Schema({
   timestamps: { type: Date, default: Date.now}
 });
 
-var Document = mongoose.model('User', documentSchema)
+var Document = mongoose.model('Document', documentSchema)
 
 module.exports = Document;

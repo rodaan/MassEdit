@@ -3,6 +3,7 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var mongoose = require('mongoose');
+var docs = require('./db/documents/documentController.js');
 
 mongoose.connect('mongodb://localhost/massedit');
 
@@ -10,15 +11,27 @@ app.use(express.static(__dirname + '/client'))
 
 // require('./config/middleware.js')(app, express);
 // require('./server/routes.js')(app, express);
+var router = express.Router();
 
-app.get('/', function(req, res){
+
+router.get('/', function(req, res){
   res.sendFile(__dirname + '/client/index.html');
+  console.log('hallo');
 });
 
+app.use('/', router);
+
 io.on('connection', function(socket){
-  console.log('a user connected');
-  socket.on('chat message', function(msg){
+  docs.newDocument();
+  socket.on('documentUpdate', function(msg){
     console.log('message: ' + msg);
+    var updateObj = {
+    	code : 'test',
+    	title: 'Cool stuff',
+    	creator: 'testor',
+    	text: msg
+    }
+    docs.updateDocument(updateObj)
   });
 
   socket.on('disconnect', function(){

@@ -21,7 +21,7 @@
       <script>
         var socket = io();
         setInterval(function(){
-          socket.emit('chat message', $('input').val());
+          socket.emit('documentUpdate', $('input').val());
           console.log($('input').val());
           return false;
         }, 10000)
