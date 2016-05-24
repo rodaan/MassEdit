@@ -12,7 +12,7 @@
     </head>
     <body ng-app="MySimpleEditor">
 	    <h1>MassEdit</h1>
-      <button class="btn btn-primary" onclick='inputUsername()'>Input Username</button>
+      <button class="btn btn-primary username" onclick='inputUsername()'>Input Username</button>
       <div class='updateBtn'>
         Conflicts Detected:
         <button  class="btn btn-primary" onclick="location.reload()">Update Document</button>
@@ -21,10 +21,14 @@
 	    <div ng-controller="MyController">
 	      <div text-angular ng-model="htmlContent" class="htmlContent"></div>
       </div>
-     
-      <ul id="messages"></ul>
+      <div>
+        <ul id="messages"></ul>
+        <br>
+        <br>
+        <br>
+      </div>
       <form action="">
-        <input id="m" autocomplete="off" /><button>Send</button>
+        <input id="m" autocomplete="off" /><button class="btn btn-primary">Send</button>
       </form>
 
       <script src="/socket.io/socket.io.js"></script>
@@ -49,6 +53,8 @@
 
         function inputUsername(){
           username = prompt('Whats your username?');
+          var text = 'Welcome '.concat(username);
+          $('.username').text(text);
         }
 
         var socket = io();
@@ -59,7 +65,7 @@
           $scope.$apply(function(){
             $scope.htmlContent = match.text;
             // console.log($scope.htmlContent);
-            console.log($scope.htmlContent !== $('input').val());
+            // console.log($scope.htmlContent !== $('input').val());
             var conflictButton = function(){
               if($scope.htmlContent !== $('input').val()){
                 $('.updateBtn').show();
