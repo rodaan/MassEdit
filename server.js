@@ -25,19 +25,25 @@ io.on('connection', function(socket){
   docs.newDocument(null,null, function(match){
   	socket.emit('dataFromDB', match);
   });
-  socket.on('documentUpdate', function(msg){
-    console.log('message: ' + msg);
+
+  setInterval(function(){
+    socket.emit('updatingDoc');
+    return false;
+  }, 1000);
+
+  socket.on('documentUpdate', function(clientDoc){
+    console.log('message: ' + clientDoc.text);
     var updateObj = {
     	code : 'test',
     	title: 'Cool stuff',
     	creator: 'testor',
-    	text: msg
+    	text: clientDoc.text
     }
     docs.updateDocument(updateObj, null, function(match){
     	console.log('match is here too!', match);
-	    socket.emit('dataFromDB', match);
+	    socket.broadcast.emit('dataFromDB', match);
     	
-    })
+    });
   });
 
   socket.on('disconnect', function(){
