@@ -13,7 +13,7 @@ module.exports = {
     findDocument({code: code})
       .then(function(match){
         if(match){
-          res.send(match);
+          next(match);
         } else {
         	return code;
         }
@@ -43,24 +43,27 @@ module.exports = {
       .then(function(match){
       	console.log(match);
         if(match){
-          var newDocument = new Document({
-          	title: req.title, //ToDo: make it take in title specified by creator
-      			code: req.code,
-      			text: req.text,
-      			creator: req.creator //Todo : make it username
-          });
-          newDocument.save(function(){
-          	console.log('completed');
+         //  var newDocument = new Document({
+         //  	title: req.title, //ToDo: make it take in title specified by creator
+      			// code: req.code,
+      			// text: req.text,
+      			// creator: req.creator //Todo : make it username
+         //  });
+          match.text = req.text;
+          match.save(function(){
+          	console.log('record saved', match);
+          	next(match);
           });
         } else {
         	res.sendStatus(404);
         }
       })
-      .then(function(savedDocument){
-      	if(savedDocument){
-      		res.json(createdDocument);
-      	}
-      })
+      // .then(function(savedDocument){
+      // 	if(savedDocument){
+      // 		console.log('saved document is:', savedDocument);
+      // 		res.json(createdDocument);
+      // 	}
+      // })
       .fail(function(error){
       	next(error);
       });

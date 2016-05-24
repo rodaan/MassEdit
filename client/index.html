@@ -20,11 +20,15 @@
       <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
       <script>
         var socket = io();
+        socket.on('dataFromDB', function(match){
+          console.log('all the way out here:', match);
+          $('input').val(match.text);
+        });
         setInterval(function(){
           socket.emit('documentUpdate', $('input').val());
           console.log($('input').val());
           return false;
-        }, 10000)
+        }, 10000);
         // $('input').change(function(){
         //   socket.emit('chat message', $('input').val());
         //   console.log($('input').val());

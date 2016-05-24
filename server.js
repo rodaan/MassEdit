@@ -22,7 +22,9 @@ router.get('/', function(req, res){
 app.use('/', router);
 
 io.on('connection', function(socket){
-  docs.newDocument();
+  docs.newDocument(null,null, function(match){
+  	socket.emit('dataFromDB', match);
+  });
   socket.on('documentUpdate', function(msg){
     console.log('message: ' + msg);
     var updateObj = {
@@ -31,7 +33,11 @@ io.on('connection', function(socket){
     	creator: 'testor',
     	text: msg
     }
-    docs.updateDocument(updateObj)
+    docs.updateDocument(updateObj, null, function(match){
+    	console.log('match is here too!', match);
+	    socket.emit('dataFromDB', match);
+    	
+    })
   });
 
   socket.on('disconnect', function(){
