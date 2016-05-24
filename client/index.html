@@ -19,24 +19,45 @@
         Conflicts Detected:
         <button onclick="location.reload()">Update Document</button>
       </div>
-      
+
       <script src="/socket.io/socket.io.js"></script>
       <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
       <script>
+        $('.updateBtn').hide();
+        function debounce(func, wait, immediate) {
+          var timeout;
+          return function() {
+            var context = this, args = arguments;
+            var later = function() {
+              timeout = null;
+              if (!immediate) func.apply(context, args);
+            };
+            var callNow = immediate && !timeout;
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+            if (callNow) func.apply(context, args);
+          };
+        };
+
         var socket = io();
         socket.on('dataFromDB', function(match){
-          console.log('all the way out here:', match);
+          // console.log('all the way out here:', match);
           var appElement = document.querySelector('[ng-app=MySimpleEditor]');
           var $scope = angular.element(appElement).scope();
           $scope.$apply(function(){
             $scope.htmlContent = match.text;
-            console.log($scope.htmlContent);
+            // console.log($scope.htmlContent);
             console.log($scope.htmlContent !== $('input').val());
-            if($scope.htmlContent !== $('input').val()){
-              $('.updateBtn').show();
-            } else {
-              $('.updateBtn').hide();
-            }
+            var debounceConflict = debounce(function(){
+              if($scope.htmlContent !== $('input').val()){
+                $('.updateBtn').show();
+              } else {
+                $('.updateBtn').hide();
+              }
+            }, 10000);
+            //debounce will produce a version of the function
+            //that will only run the last invocation o
+            debounceConflict();
           });
 
         });
@@ -46,7 +67,7 @@
             text: $('input').val(),
             timestamp: Date.now()
           }
-          console.log(clientDoc);
+          // console.log(clientDoc);
           socket.emit('documentUpdate', clientDoc);
         })
         // setInterval(function(){

@@ -16,7 +16,7 @@ var router = express.Router();
 
 router.get('/', function(req, res){
   res.sendFile(__dirname + '/client/index.html');
-  console.log('hallo');
+  // console.log('hallo');
 });
 
 app.use('/', router);
@@ -32,7 +32,7 @@ io.on('connection', function(socket){
   }, 1000);
 
   socket.on('documentUpdate', function(clientDoc){
-    console.log('message: ' + clientDoc.text);
+    // console.log('message: ' + clientDoc.text);
     var updateObj = {
     	code : 'test',
     	title: 'Cool stuff',
@@ -40,7 +40,7 @@ io.on('connection', function(socket){
     	text: clientDoc.text
     }
     docs.updateDocument(updateObj, null, function(match){
-    	console.log('match is here too!', match);
+    	// console.log('match is here too!', match);
 	    socket.broadcast.emit('dataFromDB', match);
     	
     });
