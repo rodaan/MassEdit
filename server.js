@@ -27,7 +27,7 @@ io.on('connection', function(socket){
   });
 
   setInterval(function(){
-    socket.emit('updatingDoc');
+    socket.broadcast.emit('updatingDoc');
     return false;
   }, 1000);
 

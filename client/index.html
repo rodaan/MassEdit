@@ -15,7 +15,11 @@
 	    <div ng-controller="MyController">
 	      <div text-angular ng-model="htmlContent" class="htmlContent"></div>
       </div>
-
+      <div class='updateBtn'>
+        Conflicts Detected:
+        <button onclick="location.reload()">Update Document</button>
+      </div>
+      
       <script src="/socket.io/socket.io.js"></script>
       <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
       <script>
@@ -27,6 +31,12 @@
           $scope.$apply(function(){
             $scope.htmlContent = match.text;
             console.log($scope.htmlContent);
+            console.log($scope.htmlContent !== $('input').val());
+            if($scope.htmlContent !== $('input').val()){
+              $('.updateBtn').show();
+            } else {
+              $('.updateBtn').hide();
+            }
           });
 
         });
