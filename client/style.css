@@ -25,6 +25,13 @@ body {
 .topbar {
 	margin-bottom: 5px;
 }
+/* Chat Directory */
+
+.directory-box {
+	margin-bottom: 5px;
+	margin-top: -10px;
+}
+
 /* Chat Box */
       
 form { 

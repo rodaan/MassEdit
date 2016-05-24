@@ -50,6 +50,8 @@ Angular
 Node
 Express
 Bootstrap
+MongoDB
+Mongoose ORM
 
 Step 1:
 [ x ] Create a text editor interface
@@ -64,14 +66,22 @@ Step 5:
 Step 6:
 [ x ] Add basic login
 Step 7:
-[ ] Allow users to see who else is logged in
+[ x ] Allow users to see number of users logged in
 Step 8:
-[ ] Ensure state saves into file based on project
+[ ] Create login page
 Step 9:
 [  ] Add Github authentication
 Step 10:
-[ ] Refine document conflict handling
+[ ] Ensure state saves into file based on project
 Step 11:
+[ ] Create a project listing page for each user
+Step 12:
+[ ] Allow users to see who is logged in
+Step 13:
+[ ] Save chat messages
+Step 14:
+[ ] Refine document conflict handling
+Step 15:
 [ ] Make text editor more refined and fix bugs with document updating
 
 
