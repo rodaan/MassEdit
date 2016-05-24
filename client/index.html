@@ -42,7 +42,7 @@
       <script src="/socket.io/socket.io.js"></script>
       <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
       <script>
-        var username = 'Bro';
+        var username = 'Anonymous';
         $('.updateBtn').hide();
         function debounce(func, wait, immediate) {
           var timeout;
@@ -59,13 +59,16 @@
           };
         };
 
-        function inputUsername(){
+        var socket = io();
+
+        var inputUsername = function(){
           username = prompt('Whats your username?');
           var text = 'Welcome '.concat(username);
           $('.username').text(text);
+          //ToDo: add this when we have state
+          // socket.emit('namedUser', username);
         }
 
-        var socket = io();
         socket.on('dataFromDB', function(match){
           // console.log('all the way out here:', match);
           var appElement = document.querySelector('[ng-app=MySimpleEditor]');
@@ -91,14 +94,15 @@
         });
 
         socket.on('newUser', function(userList){
-          var directory = userList.reduce(function(memo, user, i){
-            if(i === userList.length - 1){
-              return memo + ' and ' + user;
-            } else {
-              return memo + user + ', ';
-            }
-          }, '');
-          $('.directory').text('Currently viewing: ' +directory);
+          //ToDo: for went state is saved
+          // var directory = userList.reduce(function(memo, user, i){
+          //   if(i === userList.length - 1){
+          //     return memo + ' and ' + user;
+          //   } else {
+          //     return memo + user + ', ';
+          //   }
+          // }, '');
+          $('.directory').text('Currently viewing: ' +userList);
         });
 
         socket.on('updatingDoc', function(){
@@ -108,6 +112,11 @@
           }
           // console.log(clientDoc);
           socket.emit('documentUpdate', clientDoc);
+        });
+        
+        //When a user disconnects, client sends username back to client
+        socket.on('userDisconnect', function(){
+          socket.emit('namedUser', username);
         })
 
         //Chat functionality

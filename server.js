@@ -10,6 +10,7 @@ mongoose.connect('mongodb://localhost/massedit');
 app.use(express.static(__dirname + '/client'))
 
 var currentUsers = [];
+var currentUserCount = 0;
 
 // require('./config/middleware.js')(app, express);
 // require('./server/routes.js')(app, express);
@@ -25,9 +26,10 @@ app.use('/', router);
 
 io.on('connection', function(socket){
   docs.newDocument(null,null, function(match){
+  	currentUserCount += 1;
   	socket.emit('dataFromDB', match);
-  	currentUsers.push('Anonymous');
-  	socket.emit('newUser', currentUsers);
+  	// currentUsers.push('Anonymous');
+  	socket.emit('newUser', currentUserCount);
   });
 
   setInterval(function(){
@@ -54,9 +56,20 @@ io.on('connection', function(socket){
     io.emit('chat message', msgObj);
   });
 
+  socket.on('namedUser', function(username){
+  	if(currentUsers.indexOf('Anonymous') > 0){
+      currentUsers.splice(currentUsers.indexOf('Anonymous'), 1);
+    }
+    currentUsers.push(username);
+    socket.emit('newUser', currentUsers);
+  });
+  
+  //Remove address list and tells clients to send usernames
   socket.on('disconnect', function(){
+  	currentUserCount -= 1;
     console.log('user disconnected');
-    currentUsers.pop();
+    // currentUsers = [];
+    socket.emit('newUser', currentUserCount - 1);
   });
 });
 
