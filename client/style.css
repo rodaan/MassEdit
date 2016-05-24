@@ -18,6 +18,10 @@ body {
     margin:20px 0;
 }
 
+.updateBtn {
+	display: inline;
+}
+
 /* Chat Box */
       
 form { 

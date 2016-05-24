@@ -12,14 +12,16 @@
     </head>
     <body ng-app="MySimpleEditor">
 	    <h1>MassEdit</h1>
+      <button class="btn btn-primary" onclick='inputUsername()'>Input Username</button>
+      <div class='updateBtn'>
+        Conflicts Detected:
+        <button  class="btn btn-primary" onclick="location.reload()">Update Document</button>
+      </div>
+
 	    <div ng-controller="MyController">
 	      <div text-angular ng-model="htmlContent" class="htmlContent"></div>
       </div>
-      <div class='updateBtn'>
-        Conflicts Detected:
-        <button onclick="location.reload()">Update Document</button>
-      </div>
-
+     
       <ul id="messages"></ul>
       <form action="">
         <input id="m" autocomplete="off" /><button>Send</button>
@@ -28,6 +30,7 @@
       <script src="/socket.io/socket.io.js"></script>
       <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
       <script>
+        var username = 'Bro';
         $('.updateBtn').hide();
         function debounce(func, wait, immediate) {
           var timeout;
@@ -43,6 +46,10 @@
             if (callNow) func.apply(context, args);
           };
         };
+
+        function inputUsername(){
+          username = prompt('Whats your username?');
+        }
 
         var socket = io();
         socket.on('dataFromDB', function(match){
@@ -80,15 +87,19 @@
 
         //Chat functionality
         $('form').submit(function(){
-          socket.emit('chat message', $('#m').val());
+          var msgObj = {
+            user: username,
+            text: $('#m').val()
+          }
+          socket.emit('chat message', msgObj);
           $('#m').val('');
           return false;
         });
 
-        socket.on('chat message', function(msg){
-          $('#messages').append($('<li>').text(msg));
+        socket.on('chat message', function(msgObj){
+          $('#messages').append($('<li>').text(msgObj.user + ': ' + msgObj.text));
         });
-        
+
       </script>
     </body>
 </html>
