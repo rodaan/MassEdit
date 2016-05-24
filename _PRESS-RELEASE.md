@@ -54,6 +54,24 @@ Bootstrap
 Step 1:
 [ x ] Create a text editor interface
 Step 2:
-[] Ensure multiple people can access it
+[ x ] Ensure multiple people can access it
 Step 3:
+[ x ] Ensure text editor changes with updates
+Step 4:
+[ x ] Handle document conflicts
+Step 5:
+[ x ] Chat box communication
+Step 6:
+[ x ] Add basic login
+Step 7:
+[ ] Allow users to see who else is logged in
+Step 8:
 [ ] Ensure state saves into file based on project
+Step 9:
+[  ] Add Github authentication
+Step 10:
+[ ] Refine document conflict handling
+Step 11:
+[ ] Make text editor more refined and fix bugs with document updating
+
+

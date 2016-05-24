@@ -22,6 +22,9 @@ body {
 	display: inline;
 }
 
+.topbar {
+	margin-bottom: 5px;
+}
 /* Chat Box */
       
 form { 

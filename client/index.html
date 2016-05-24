@@ -12,18 +12,26 @@
     </head>
     <body ng-app="MySimpleEditor">
 	    <h1>MassEdit</h1>
-      <button class="btn btn-primary username" onclick='inputUsername()'>Input Username</button>
+      <!-- Login and Conflict Detection -->
+      <button class="btn btn-primary username topbar" onclick='inputUsername()'>Input Username</button>
       <div class='updateBtn'>
         Conflicts Detected:
-        <button  class="btn btn-primary" onclick="location.reload()">Update Document</button>
+        <button  class="btn btn-primary topbar" onclick="location.reload()">Update Document</button>
       </div>
 
+      <!-- Text Editor -->
 	    <div ng-controller="MyController">
 	      <div text-angular ng-model="htmlContent" class="htmlContent"></div>
       </div>
+
+      <!-- directory bar -->
+      <div>
+        <span class="directory"></span>
+      </div>
+      <!-- Chat Box -->
       <div>
         <ul id="messages"></ul>
-        <br>
+        <br> <!--to ensure chat messages are not hidden by fixed input bar-->
         <br>
         <br>
       </div>
@@ -80,6 +88,17 @@
             debounceConflict();
           });
 
+        });
+
+        socket.on('newUser', function(userList){
+          var directory = userList.reduce(function(memo, user, i){
+            if(i === userList.length - 1){
+              return memo + ' and ' + user;
+            } else {
+              return memo + user + ', ';
+            }
+          }, '');
+          $('.directory').text('Currently viewing: ' +directory);
         });
 
         socket.on('updatingDoc', function(){

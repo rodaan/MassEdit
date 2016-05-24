@@ -9,6 +9,8 @@ mongoose.connect('mongodb://localhost/massedit');
 
 app.use(express.static(__dirname + '/client'))
 
+var currentUsers = [];
+
 // require('./config/middleware.js')(app, express);
 // require('./server/routes.js')(app, express);
 var router = express.Router();
@@ -24,6 +26,8 @@ app.use('/', router);
 io.on('connection', function(socket){
   docs.newDocument(null,null, function(match){
   	socket.emit('dataFromDB', match);
+  	currentUsers.push('Anonymous');
+  	socket.emit('newUser', currentUsers);
   });
 
   setInterval(function(){
@@ -52,6 +56,7 @@ io.on('connection', function(socket){
 
   socket.on('disconnect', function(){
     console.log('user disconnected');
+    currentUsers.pop();
   });
 });
 
