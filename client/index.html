@@ -22,7 +22,13 @@
         var socket = io();
         socket.on('dataFromDB', function(match){
           console.log('all the way out here:', match);
-          $('input').val(match.text);
+          var appElement = document.querySelector('[ng-app=MySimpleEditor]');
+          var $scope = angular.element(appElement).scope();
+          $scope.$apply(function(){
+            $scope.htmlContent = match.text;
+            console.log($scope.htmlContent);
+          });
+
         });
         setInterval(function(){
           socket.emit('documentUpdate', $('input').val());
