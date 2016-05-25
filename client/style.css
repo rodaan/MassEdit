@@ -6,7 +6,24 @@
 
 body {
 	margin: 0 20px;
-	font: 13px Helvetica, Arial; 
+	font: 16px Lato, Helvetica, Arial; 
+	color: #3b3a36;
+	background-color: #e9ece5;
+}
+
+.btn-primary {
+	background-color: #b3c2bf;
+	border-color: #6b7472;
+}
+
+.btn-primary:hover {
+	background-color: #6b7472;
+	border-color: #353a39;
+}
+
+.form-control:focus {
+  border-color: #353a39;
+  box-shadow-color: #353a39
 }
 
 .ta-editor {
@@ -56,6 +73,10 @@ form button {
 	padding: 10px; 
 }
 
+.messageBtn {
+	margin-bottom: 3px;
+}
+
 #messages { 
 	list-style-type: none; 
 	margin: 0; 
@@ -67,5 +88,5 @@ form button {
 }
 
 #messages li:nth-child(odd) { 
-	background: #eee; 
+	background: #d1dad8; 
 }
