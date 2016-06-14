@@ -12,7 +12,6 @@ Rich Full Text editor for collaboration
 - [Getting Started](#getting-started)
 - [Architecture](#architecture)
   - [High Level Architecture](#high-level-architecture)
-  - [Database Schema](#database-schema)
 - [Team Members](#team-members)
 
 ##Technology Stack
@@ -23,7 +22,7 @@ Rich Full Text editor for collaboration
 
 ## Example / Usage
 
-Simply create an account, select a time when you are free, and wait for an email confirmation for your next roam!
+Simply login, create a username for yourself, and start editing!
 
 ![massedit](http://i67.tinypic.com/2iibzlw.gif)
 
